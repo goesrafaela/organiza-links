@@ -5,8 +5,13 @@ import { styles } from "./styles";
 import { categories } from "@/utils/categories";
 import { Category } from "@/components/category";
 
+type Props = {
+    selected: string
+    onChange: (category: string) => void
+}
 
-export function Categories() {
+
+export function Categories({selected, onChange} : Props) {
     return (
         <FlatList
             data={categories}
@@ -15,11 +20,14 @@ export function Categories() {
             <Category 
             name={item.name} 
             icon={item.icon} 
-            isSelected={false} />
+            isSelected={item.name === selected} 
+            onPress={() => onChange(item.name)}
+            />
             )}
             horizontal
             style={styles.container}
             contentContainerStyle={styles.content}
+            
             //remove a barra de rolagem👇👇
             showsHorizontalScrollIndicator={false}
         />
