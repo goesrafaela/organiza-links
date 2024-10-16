@@ -5,6 +5,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { colors } from "@/styles/colors";
 import { Categories } from "@/components/categories";
+import { Input } from "@/components/input";
+import { Button } from "@/components/button";
 
 export default function App(){
     return(
@@ -18,6 +20,12 @@ export default function App(){
             </View>
             <Text style={styles.label}>Seleciona a categoria</Text>
             <Categories/>
+
+            <View style={styles.form}>
+            <Input placeholder="Nome" />
+            <Input placeholder="Url" />
+            <Button title="Adicionar"/>
+            </View>
         </View>
     )
 }
