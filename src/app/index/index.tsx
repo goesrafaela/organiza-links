@@ -1,12 +1,13 @@
 import { useState, useCallback } from "react";
 import {
-  Image,
   View,
-  TouchableOpacity,
-  FlatList,
-  Modal,
   Text,
+  Modal,
+  Image,
   Alert,
+  FlatList,
+  Linking,
+  TouchableOpacity,
 } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -45,10 +46,7 @@ export default function Index() {
     setLink(selected)
   }
 
-  function handleOpen(){
-    
-  }
-
+  
   async function linkRemove() {
     try {
       await linkStorage.remove(link.id)
@@ -65,6 +63,15 @@ export default function Index() {
         {text: "Sim", onPress: linkRemove}
       ])
     
+  }
+
+  async function handleOpen(){
+    try {
+      await Linking.openURL(link.url)
+      setShowModal(false)
+    } catch (error) {
+      Alert.alert("Link", "Não foi possivel abrir o link desejado")
+    }
   }
 
   useFocusEffect(
